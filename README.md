@@ -1,4 +1,4 @@
-# KNP-Routed-IPTV-with-OPNsense
+# KPN-Routed-IPTV-with-OPNsense
 Explenation on how to get Routed IPTV from KPN working with OPNsense
 
 So, You have KPN FTTH (or another KPN based) with IPTV but don't want to use the included modum/router?
