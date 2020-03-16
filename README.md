@@ -23,7 +23,7 @@ I have my KPN TV Box in a seperate VLAN. If you don't want this, just add the ru
 My WAN side is on vmx1
 My LAN side is on vmx0
 
-# Interfaces
+## Interfaces
 On your WAN side you need 2 VLAN's.
 VLAN4 with DHCP for the TV
 VLAN6 with PPPoE for your Internet
@@ -66,7 +66,7 @@ IPv4 type is Static
 Give it a IPv4 address (mine is 192.168.40.1/24)
 Click Save
 
-# Firewall
+## Firewall
 Go to Firewall -> Rules -> IPTV
 Add a rule
 Action = Pass
@@ -83,28 +83,28 @@ click Save
 
 Go to Firewall -> Rules -> WAN_IPTV
 Add the following rules, they are the same as the IPTV rules accept for the following parts:
-Rule A: Protocol = IPv4 IGMP
-Rule B: Protocol = IPv4 UDP, Source = 213.75.0.0/16, destination = 224.0.0.0/4
-Rule C: Protocol = IPv4 UDP, Source = 217.166.0.0/16, destination = 224.0.0.0/4
-Rule D: Protocol = IPv4 UDP, Source = 213.75.0.0/16, destination = WAN_IPTV address
-Rule E: Protocol = IPv4 UDP, Source = 217.166.0.0/16, destination = WAN_IPTV address
-Rule F: Protocol = IPv4 any, Source = 10.0.0.0/8, Destination = 224.0.0.0/4
+*Rule A: Protocol = IPv4 IGMP
+*Rule B: Protocol = IPv4 UDP, Source = 213.75.0.0/16, destination = 224.0.0.0/4
+*Rule C: Protocol = IPv4 UDP, Source = 217.166.0.0/16, destination = 224.0.0.0/4
+*Rule D: Protocol = IPv4 UDP, Source = 213.75.0.0/16, destination = WAN_IPTV address
+*Rule E: Protocol = IPv4 UDP, Source = 217.166.0.0/16, destination = WAN_IPTV address
+*Rule F: Protocol = IPv4 any, Source = 10.0.0.0/8, Destination = 224.0.0.0/4
 
-# NAT
+## NAT
 Got to Firewall -> NAT -> Outbound
 set the mode at Hybrid
 Add the following 3 outbound rules:
-A: Interface WAN_IPTV, Source IPTV net, source port+destination+destination port = any, NAT address = WAN_IPTV address
-B: Interface WAN_IPTV, Source IPTV net, source port = any, destination = 217.166.0.0/16, destination port = any, NAT address = WAN_IPTV address
-C: Interface WAN_IPTV, Source IPTV net, source port = any, destination = 213.75.0.0/16, destination port = any, NAT address = WAN_IPTV address
+*A: Interface WAN_IPTV, Source IPTV net, source port+destination+destination port = any, NAT address = WAN_IPTV address
+*B: Interface WAN_IPTV, Source IPTV net, source port = any, destination = 217.166.0.0/16, destination port = any, NAT address = WAN_IPTV address
+*C: Interface WAN_IPTV, Source IPTV net, source port = any, destination = 213.75.0.0/16, destination port = any, NAT address = WAN_IPTV address
 
-# IGMP Proxy
+## IGMP Proxy
 Make sure you have IGMP_Proxy installed.
 if not, go to System -> Firmware -> Plugins and click on the + behind os-igmp-proxy
 
 Got to Services -> IGMP Proxy
 Add the following 2 rules:
-A: Interface = WAN_IPTV, Type = Upstream Interface, Networks = 213.75.0.0/16, 10.0.0.0/1, 217.166.0.0/1
-B: Interface = IPTV (or your LAN), Type = Downstream Interface, Network = (you network, in my case 192.168.40.0/24)
+*A: Interface = WAN_IPTV, Type = Upstream Interface, Networks = 213.75.0.0/16, 10.0.0.0/1, 217.166.0.0/1
+*B: Interface = IPTV (or your LAN), Type = Downstream Interface, Network = (you network, in my case 192.168.40.0/24)
 
 This should be all.
